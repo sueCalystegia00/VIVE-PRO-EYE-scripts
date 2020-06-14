@@ -18,10 +18,10 @@ namespace ViveSR.anipal.Eye
     //private static VerboseData verboseData;
     private bool eye_callback_registered = false;
 
-    private float eyeOpenLeft, eyeOpenRight, eyeOpenCombined;
-    private float pupilDiameterLeft, pupilDiameterRight, pupilDiameterCombined;
-    private Vector2 pupilPositionLeft, pupilPositionRight, pupilPositionCombined;
-    private Vector3 gaze_direction_right, gaze_direction_left, gaze_direction_combined;
+    private static float eyeOpenLeft, eyeOpenRight, eyeOpenCombined;
+    private static float pupilDiameterLeft, pupilDiameterRight, pupilDiameterCombined;
+    private static Vector2 pupilPositionLeft, pupilPositionRight, pupilPositionCombined;
+    private static Vector3 gaze_direction_right, gaze_direction_left, gaze_direction_combined;
 
 
     /// <summary>
@@ -38,6 +38,8 @@ namespace ViveSR.anipal.Eye
     /// </summary>
     void Update()
     {
+      Debug.Log("update fugafuga");
+
       // check the status of the anipal engine before getting eye data
       if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING &&
           SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.NOT_SUPPORT) return;
@@ -53,7 +55,7 @@ namespace ViveSR.anipal.Eye
         SRanipal_Eye_v2.WrapperUnRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye_v2.CallbackBasic)EyeCallback));
         eye_callback_registered = false;
       }
-
+      
     }
 
     /// <summary>
@@ -61,6 +63,7 @@ namespace ViveSR.anipal.Eye
     /// </summary>
     private static void EyeCallback(ref EyeData_v2 eye_data)
     {
+      Debug.Log("callback hogehoge");
       // Gets data from anipal's Eye module
       eyeData = eye_data;
 
