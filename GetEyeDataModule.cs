@@ -18,6 +18,7 @@ namespace ViveSR.anipal.Eye
     //private static VerboseData verboseData;
     private bool eye_callback_registered = false;
 
+    private static int timeStamp;
     private static float eyeOpenLeft, eyeOpenRight, eyeOpenCombined;
     private static float pupilDiameterLeft, pupilDiameterRight, pupilDiameterCombined;
     private static Vector2 pupilPositionLeft, pupilPositionRight, pupilPositionCombined;
@@ -66,6 +67,9 @@ namespace ViveSR.anipal.Eye
       Debug.Log("callback hogehoge");
       // Gets data from anipal's Eye module
       eyeData = eye_data;
+
+      // The time when the frame was capturing. in millisecond.
+      timeStamp = eyeData.timestamp;
 
       // A value representing how open the eye is in [0,1]
       eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
