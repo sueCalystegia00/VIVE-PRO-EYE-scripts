@@ -4,7 +4,7 @@ Examples to measure eye movement data using VIVE pro eye.<br>
 * Eye_ver2
 
 ## Overview
-* GetEyeDataModule.cs
+* GetEyeDataModule.cs ~
   This is a sample code to use the callback function to get the eye information at 120Hz, which is higher than Unity's frequency of object update (90Hz).
 
 ## Usage
