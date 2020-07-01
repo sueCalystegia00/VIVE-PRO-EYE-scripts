@@ -15,7 +15,6 @@ namespace ViveSR.anipal.Eye
   public class GetEyeDataModule : MonoBehaviour
   {
     private static EyeData_v2 eyeData = new EyeData_v2();
-    //private static VerboseData verboseData;
     private bool eye_callback_registered = false;
 
     private static int timeStamp;
@@ -24,6 +23,8 @@ namespace ViveSR.anipal.Eye
     private static Vector2 pupilPositionLeft, pupilPositionRight, pupilPositionCombined;
     private static Vector3 gaze_direction_right, gaze_direction_left, gaze_direction_combined;
 
+    readonly static object DebugWriter = new object();
+    private CSVWriter csvwriter;
 
     /// <summary>
     /// Use this for initialization
@@ -32,6 +33,8 @@ namespace ViveSR.anipal.Eye
     {
       // Whether to enable anipal's Eye module
       if (!SRanipal_Eye_Framework.Instance.EnableEye) return;
+
+      csvwriter = GetComponent<CSVWriter>();
     }
 
     /// <summary>
@@ -94,6 +97,11 @@ namespace ViveSR.anipal.Eye
       gaze_direction_right = eyeData.verbose_data.right.gaze_direction_normalized;
       gaze_direction_combined = eyeData.verbose_data.combined.eye_data.gaze_direction_normalized; 
       Debug.Log("gaze_direction_left: " + gaze_direction_left);
+
+      lock (DebugWriter)
+      {
+          csvwriter.write;
+      }
 
     }
 
