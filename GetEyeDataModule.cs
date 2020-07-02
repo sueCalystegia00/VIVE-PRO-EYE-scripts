@@ -17,11 +17,11 @@ namespace ViveSR.anipal.Eye
     private static EyeData_v2 eyeData = new EyeData_v2();
     private bool eye_callback_registered = false;
 
-    private static int timeStamp;
-    private static float eyeOpenLeft, eyeOpenRight, eyeOpenCombined;
-    private static float pupilDiameterLeft, pupilDiameterRight, pupilDiameterCombined;
-    private static Vector2 pupilPositionLeft, pupilPositionRight, pupilPositionCombined;
-    private static Vector3 gaze_direction_right, gaze_direction_left, gaze_direction_combined;
+    public static int timeStamp;
+    public static float eyeOpenLeft, eyeOpenRight, eyeOpenCombined;
+    public static float pupilDiameterLeft, pupilDiameterRight, pupilDiameterCombined;
+    public static Vector2 pupilPositionLeft, pupilPositionRight, pupilPositionCombined;
+    public static Vector3 gaze_direction_right, gaze_direction_left, gaze_direction_combined;
 
     readonly static object DebugWriter = new object();
     private CSVWriter csvwriter;
@@ -33,8 +33,6 @@ namespace ViveSR.anipal.Eye
     {
       // Whether to enable anipal's Eye module
       if (!SRanipal_Eye_Framework.Instance.EnableEye) return;
-
-      csvwriter = GetComponent<CSVWriter>();
     }
 
     /// <summary>
@@ -100,7 +98,7 @@ namespace ViveSR.anipal.Eye
 
       lock (DebugWriter)
       {
-          csvwriter.write;
+          CSVwriter.Write();
       }
 
     }
