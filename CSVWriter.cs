@@ -17,11 +17,15 @@ namespace ViveSR.anipal.Eye
     {
         private static StreamWriter streamwriter;
         private string filepath;
-        private string dataLabels = "timestamp" + "," + "pupilDia_L" + "," + "pupilDia_R" + "," +
-                                                      "pupilPosL.X" + "," + "pupilPosL.Y" + "," +
-                                                      "pupilPosR.X" + "," + "pupilPosR.Y" + "," +
-                                                      "gazeDir_L.X" + "," + "gazeDir_L.Y" + "," + "gazeDir_L.Z" + "," +
-                                                      "gazeDir_R.X" + "," + "gazeDir_R.Y" + "," + "gazeDir_R.Z";
+        private string dataLabels = "timestamp" + "," + 
+                                    "gazeOrigin_L.X" + "," + "gazeOrigin_L.Y" + "," + "gazeOrigin_L.Z" + "," +
+                                    "gazeOrigin_R.X" + "," + "gazeOrigin_R.Y" + "," + "gazeOrigin_R.Z" + "," +
+                                    "gazeDir_L.X" + "," + "gazeDir_L.Y" + "," + "gazeDir_L.Z" + "," +
+                                    "gazeDir_R.X" + "," + "gazeDir_R.Y" + "," + "gazeDir_R.Z" + "," +
+                                    "pupilDia_L" + "," + "pupilDia_R" + "," +
+                                    "eyeOpenness_L" + "," + "eyeOpenness_R" + "," +
+                                    "pupilPosL.X" + "," + "pupilPosL.Y" + "," +
+                                    "pupilPosR.X" + "," + "pupilPosR.Y";
         /// <summary>
         /// Use this for initialization
         /// </summary>
@@ -35,12 +39,15 @@ namespace ViveSR.anipal.Eye
         // Called by GetEyeDataModule
         public static void Write()
         {
-            streamwriter.WriteLine(GetEyeDataModule.timeStamp + "," + GetEyeDataModule.eyeOpenLeft + "," + GetEyeDataModule.eyeOpenRight + ","+
-                                               GetEyeDataModule.pupilDiameterLeft + "," + GetEyeDataModule.pupilDiameterRight + "," +
-                                               GetEyeDataModule.pupilPositionLeft.x + "," + GetEyeDataModule.pupilPositionLeft.y + "," +
-                                               GetEyeDataModule.pupilPositionRight.x + "," + GetEyeDataModule.pupilPositionRight.y + "," +
-                                               GetEyeDataModule.gaze_direction_Left.x + "," + GetEyeDataModule.gaze_direction_Left.y + "," + GetEyeDataModule.gaze_direction_Left.z + "," +
-                                               GetEyeDataModule.gaze_direction_Right.x + "," + GetEyeDataModule.gaze_direction_Right.y + "," + GetEyeDataModule.gaze_direction_Right.z);
+            streamwriter.WriteLine( GetEyeDataModule.timeStamp + "," + 
+                                    GetEyeDataModule.gazeOriginLeft.x + "," + GetEyeDataModule.gazeOriginLeft.y + "," + GetEyeDataModule.gazeOriginLeft.z + "," +
+                                    GetEyeDataModule.gazeOriginRight.x + "," + GetEyeDataModule.gazeOriginRight.y + "," + GetEyeDataModule.gazeOriginRight.z + ","+
+                                    GetEyeDataModule.gazeDirectionLeft.x + "," + GetEyeDataModule.gazeDirectionLeft.y + "," + GetEyeDataModule.gazeDirectionLeft.z + "," +
+                                    GetEyeDataModule.gazeDirectionRight.x + "," + GetEyeDataModule.gazeDirectionRight.y + "," + GetEyeDataModule.gazeDirectionRight.z + "," +
+                                    GetEyeDataModule.pupilDiameterLeft + "," + GetEyeDataModule.pupilDiameterRight + "," +
+                                    GetEyeDataModule.eyeOpenLeft + "," + GetEyeDataModule.eyeOpenRight + ","+
+                                    GetEyeDataModule.pupilPositionLeft.x + "," + GetEyeDataModule.pupilPositionLeft.y + "," +
+                                    GetEyeDataModule.pupilPositionRight.x + "," + GetEyeDataModule.pupilPositionRight.y);
         }
     }
 }

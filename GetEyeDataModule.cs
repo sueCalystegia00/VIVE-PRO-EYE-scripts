@@ -18,10 +18,12 @@ namespace ViveSR.anipal.Eye
     private bool eye_callback_registered = false;
 
     public static int timeStamp;
-    public static float eyeOpenLeft, eyeOpenRight, eyeOpenCombined;
+    public static Vector3 gazeOriginLeft, gazeOriginRight;
+    public static Vector3 gazeDirectionRight, gazeDirectionLeft, gazeDirectionCombined;
     public static float pupilDiameterLeft, pupilDiameterRight, pupilDiameterCombined;
+    public static float eyeOpenLeft, eyeOpenRight, eyeOpenCombined;
     public static Vector2 pupilPositionLeft, pupilPositionRight, pupilPositionCombined;
-    public static Vector3 gaze_direction_right, gaze_direction_left, gaze_direction_combined;
+    
 
     readonly static object DebugWriter = new object();
     private CSVWriter csvwriter;
@@ -72,11 +74,16 @@ namespace ViveSR.anipal.Eye
       // The time when the frame was capturing. in millisecond.
       timeStamp = eyeData.timestamp;
 
-      // A value representing how open the eye is in [0,1]
-      eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
-      eyeOpenRight = eyeData.verbose_data.right.eye_openness;
-      eyeOpenCombined = eyeData.verbose_data.combined.eye_data.eye_openness;
-      Debug.Log("eyeOpenLeft: " + eyeOpenLeft);
+      // The point in the eye from which the gaze ray originates in meter miles.(right-handed coordinate system)
+      gazeOriginLeft = eyeData.verbose_data.left.gaze_origin_mm;
+      gazeOriginRight = eyeData.verbose_data.Right.gaze_origin_mm;
+      Debug.Log("gazeOriginLeft: " + gazeOriginLeft);
+
+      // The normalized gaze direction of the eye in [0,1].(right-handed coordinate system)
+      gazeDirectionLeft = eyeData.verbose_data.left.gaze_direction_normalized;
+      gazeDirectionRight = eyeData.verbose_data.right.gaze_direction_normalized;
+      gazeDirectionCombined = eyeData.verbose_data.combined.eye_data.gaze_direction_normalized; 
+      Debug.Log("gaze_direction_left: " + gazeDirectionLeft);
 
       // The diameter of the pupil in milli meter
       pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
@@ -84,17 +91,17 @@ namespace ViveSR.anipal.Eye
       pupilDiameterCombined = eyeData.verbose_data.combined.eye_data.pupil_diameter_mm;
       Debug.Log("pupilDiameterLeft: " + pupilDiameterLeft);
 
+      // A value representing how open the eye is in [0,1]
+      eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
+      eyeOpenRight = eyeData.verbose_data.right.eye_openness;
+      eyeOpenCombined = eyeData.verbose_data.combined.eye_data.eye_openness;
+      Debug.Log("eyeOpenLeft: " + eyeOpenLeft);
+
       // The normalized position of a pupil in [0,1]
       pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
       pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
       pupilPositionCombined = eyeData.verbose_data.combined.eye_data.pupil_position_in_sensor_area;
       Debug.Log("pupilPositionLeft: " + pupilPositionLeft);
-
-      // The normalized gaze direction of the eye in [0,1].(right-handed coordinate system)
-      gaze_direction_left = eyeData.verbose_data.left.gaze_direction_normalized;
-      gaze_direction_right = eyeData.verbose_data.right.gaze_direction_normalized;
-      gaze_direction_combined = eyeData.verbose_data.combined.eye_data.gaze_direction_normalized; 
-      Debug.Log("gaze_direction_left: " + gaze_direction_left);
 
       lock (DebugWriter)
       {
@@ -103,7 +110,7 @@ namespace ViveSR.anipal.Eye
 
     }
 
-    /*
+    
     /// <summary>
     /// Terminates an anipal module
     /// </summary>
@@ -115,7 +122,7 @@ namespace ViveSR.anipal.Eye
           eye_callback_registered = false;
       }
     }
-    */
+    
 
   }
 }
